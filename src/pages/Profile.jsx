@@ -59,7 +59,11 @@ export default function Profile() {
     finally { setIsSaving(false) }
   }
 
-  const formatDate = ts => ts ? new Date(ts).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : ''
+  const formatDate = ts => {
+    if (!ts) return '';
+    if (typeof ts.toDate === 'function') return ts.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+    return new Date(ts).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+  }
   const totalReviews = userProjects.reduce((a, p) => a + (p.reviewCount || 0), 0)
 
   if (loading) return (
@@ -69,7 +73,7 @@ export default function Profile() {
   )
 
   const stats = [
-    { icon: Code2, value: userProjects.length, label: 'Projects', color: '#d4ff00' },
+    { icon: Code2, value: userProjects.length, label: 'Projects', color: 'var(--primary)' },
     { icon: Star, value: totalReviews, label: 'Reviews Received', color: '#facc15' },
     { icon: MessageSquare, value: userReviews.length, label: 'Reviews Written', color: '#34d399' },
   ]
@@ -84,7 +88,7 @@ export default function Profile() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Back */}
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-content-muted hover:text-primary-400 transition-colors mb-8 group">
+        <Link to="/" className="inline-flex items-center gap-2 text-sm content-muted hover:text-primary-500 transition-colors mb-8 group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to projects
         </Link>
@@ -92,12 +96,12 @@ export default function Profile() {
         {/* Profile header card */}
         <div className="card rounded-3xl overflow-hidden mb-8">
           {/* Banner with mesh gradient */}
-          <div className="relative h-36 overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(212,255,0,0.12) 0%, rgba(168,85,247,0.08) 50%, rgba(59,130,246,0.08) 100%)' }}>
+          <div className="relative h-36 overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(var(--primary-rgb-comma),0.12) 0%, rgba(168,85,247,0.08) 50%, rgba(59,130,246,0.08) 100%)' }}>
             <div className="absolute inset-0 mesh-bg" />
             {/* Subtle grid */}
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,1) 1px,transparent 1px)', backgroundSize: '40px 40px' }} />
             {/* Orb */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #d4ff00, transparent)', filter: 'blur(30px)' }} />
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, var(--primary), transparent)', filter: 'blur(30px)' }} />
           </div>
 
           <div className="px-8 pb-8">
@@ -202,14 +206,14 @@ export default function Profile() {
                   <div key={review.id} className="card rounded-2xl p-5">
                     <div className="flex items-center justify-between mb-3">
                       <Link to={`/project/${review.projectId}`}
-                        className="text-sm font-bold text-primary-400 hover:text-primary-300 transition-colors flex items-center gap-1.5">
+                        className="text-sm font-bold text-primary-600 dark:text-primary-400 hover:text-primary-500 transition-colors flex items-center gap-1.5">
                         View Project →
                       </Link>
                       <span className="text-xs content-muted">{formatDate(review.createdAt)}</span>
                     </div>
                     <div className="flex items-center gap-1 mb-3">
                       {[1, 2, 3, 4, 5].map(star => (
-                        <Star key={star} className={`w-4 h-4 ${star <= review.rating ? 'text-yellow-400 fill-current' : 'text-white/10'}`} />
+                        <Star key={star} className={`w-4 h-4 ${star <= review.rating ? 'text-yellow-400 fill-current' : 'text-black/20 dark:text-white/20'}`} />
                       ))}
                     </div>
                     <p className="text-sm content-muted leading-relaxed">{review.reviewText}</p>

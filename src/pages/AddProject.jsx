@@ -101,7 +101,7 @@ export default function AddProject() {
   return (
     <div className="min-h-screen page-bg py-12 relative overflow-hidden">
       {/* Ambient backgrounds */}
-      <div className="orb w-[600px] h-[600px] -top-40 -left-40 opacity-[0.05]" style={{ background: 'radial-gradient(circle, #d4ff00, transparent)' }} />
+      <div className="orb w-[600px] h-[600px] -top-40 -left-40 opacity-[0.05]" style={{ background: 'radial-gradient(circle, var(--primary), transparent)' }} />
       <div className="orb w-[400px] h-[400px] top-1/2 -right-20 opacity-[0.03]" style={{ background: 'radial-gradient(circle, #a855f7, transparent)' }} />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

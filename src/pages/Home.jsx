@@ -90,7 +90,7 @@ export default function Home() {
       {/* ─── Hero ───────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
         {/* Ambient orbs */}
-        <div className="orb w-[600px] h-[600px] orb-primary opacity-[0.08] top-[-100px] left-[-200px] animate-float-slow" style={{background:'radial-gradient(circle,#d4ff00,transparent)'}} />
+        <div className="orb w-[600px] h-[600px] orb-primary opacity-[0.08] top-[-100px] left-[-200px] animate-float-slow" style={{background:'radial-gradient(circle,var(--primary),transparent)'}} />
         <div className="orb w-[500px] h-[500px] opacity-[0.06] bottom-[-100px] right-[-150px] animate-float" style={{background:'radial-gradient(circle,#a855f7,transparent)'}} />
         <div className="orb w-[300px] h-[300px] opacity-[0.05] top-[40%] right-[25%]" style={{background:'radial-gradient(circle,#3b82f6,transparent)'}} />
 
@@ -108,7 +108,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary-500/20 mb-8 animate-fadeIn">
             <Sparkles className="w-3.5 h-3.5 text-primary-400" />
-            <span className="text-xs font-semibold text-primary-400 uppercase tracking-widest">Developer Showcase Platform</span>
+            <span className="text-xs font-semibold content-primary uppercase tracking-widest">Developer Showcase Platform</span>
           </div>
 
           {/* Headline */}
@@ -148,8 +148,8 @@ export default function Home() {
             {stats.map(({ icon: Icon, value, label, color }, i) => (
               <div key={label} className={`glass rounded-2xl p-6 text-center card-lift stagger-${i + 1}`}>
                 <Icon className={`w-6 h-6 ${color} mx-auto mb-3 opacity-80`} />
-                <div className="text-3xl font-black text-white mb-1">{value}</div>
-                <div className="text-xs text-white/40 uppercase tracking-widest">{label}</div>
+                <div className="text-3xl font-black content-primary mb-1">{value}</div>
+                <div className="text-xs content-faint uppercase tracking-widest">{label}</div>
               </div>
             ))}
           </div>
@@ -165,7 +165,7 @@ export default function Home() {
                 <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search projects or technologies…" />
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <label className="flex items-center gap-2 px-4 py-2.5 rounded-full glass border border-white/10 cursor-pointer hover:border-primary-500/30 transition-all text-sm font-medium text-white/70">
+                <label className="flex items-center gap-2 px-4 py-2.5 rounded-full glass border border-[var(--card-border)] cursor-pointer hover:border-primary-500/30 transition-all text-sm font-medium content-muted">
                   <input
                     type="checkbox"
                     checked={showCollabOnly}
@@ -210,9 +210,9 @@ export default function Home() {
           {paginatedProjects.length > 0 ? (
             <>
               <div className="flex items-center justify-between mb-8">
-                <p className="text-sm text-white/40">
-                  Showing <span className="text-white font-semibold">{paginatedProjects.length}</span> of{' '}
-                  <span className="text-white font-semibold">{filteredProjects.length}</span> projects
+                <p className="text-sm content-faint">
+                  Showing <span className="content-primary font-semibold">{paginatedProjects.length}</span> of{' '}
+                  <span className="content-primary font-semibold">{filteredProjects.length}</span> projects
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -231,10 +231,10 @@ export default function Home() {
           ) : (
             <div className="text-center py-28">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl glass mb-5">
-                <Search className="w-7 h-7 text-white/20" />
+                <Search className="w-7 h-7 content-faint" />
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">No projects found</h3>
-              <p className="text-white/40 text-sm mb-6">Try adjusting your search or filter</p>
+              <h3 className="text-lg font-bold content-primary mb-2">No projects found</h3>
+              <p className="content-muted text-sm mb-6">Try adjusting your search or filter</p>
               {(searchQuery || selectedTech || showCollabOnly) && (
                 <button
                   onClick={() => { setSearchQuery(''); setSelectedTech(null); setShowCollabOnly(false); setCurrentPage(1) }}

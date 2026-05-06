@@ -47,11 +47,11 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden page-bg">
       {/* Ambient orbs */}
-      <div className="orb w-[500px] h-[500px] top-[-150px] left-[-100px] opacity-[0.07] animate-float-slow" style={{background:'radial-gradient(circle,#d4ff00,transparent)'}} />
-      <div className="orb w-[400px] h-[400px] bottom-[-100px] right-[-100px] opacity-[0.06] animate-float" style={{background:'radial-gradient(circle,#a855f7,transparent)'}} />
+      <div className="orb w-[500px] h-[500px] top-[-150px] left-[-100px] opacity-[0.15] dark:opacity-[0.07] animate-float-slow mix-blend-multiply dark:mix-blend-screen" style={{background:'radial-gradient(circle,var(--primary),transparent)'}} />
+      <div className="orb w-[400px] h-[400px] bottom-[-100px] right-[-100px] opacity-[0.15] dark:opacity-[0.06] animate-float mix-blend-multiply dark:mix-blend-screen" style={{background:'radial-gradient(circle,#a855f7,transparent)'}} />
 
       {/* Grid */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage:'linear-gradient(var(--text) 1px,transparent 1px),linear-gradient(90deg,var(--text) 1px,transparent 1px)',backgroundSize:'60px 60px'}} />
+      <div className="absolute inset-0 opacity-[0.06] dark:opacity-[0.03]" style={{backgroundImage:'linear-gradient(var(--text) 1px,transparent 1px),linear-gradient(90deg,var(--text) 1px,transparent 1px)',backgroundSize:'60px 60px'}} />
 
       <div className="relative z-10 w-full max-w-md px-4 py-12">
         {/* Logo */}
@@ -94,7 +94,7 @@ export default function Login() {
 
           {/* Error */}
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-xl mb-4 text-sm text-red-400" style={{background:'rgba(239,68,68,0.08)',border:'1px solid rgba(239,68,68,0.2)'}}>
+            <div className="flex items-center gap-2 p-3 rounded-xl mb-4 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               <span>{error}</span>
             </div>

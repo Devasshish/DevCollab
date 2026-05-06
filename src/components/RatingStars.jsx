@@ -37,7 +37,7 @@ export default function RatingStars({ rating, onRatingChange, readonly = false, 
             className={`${sizeClasses[size]} transition-all duration-300 ${
               star <= displayRating 
                 ? 'text-yellow-400 fill-current drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]' 
-                : 'content-faint opacity-20'
+                : 'text-black/20 dark:text-white/20'
             }`}
           />
         </button>

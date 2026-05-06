@@ -20,7 +20,7 @@ export default function Navbar() {
     try { await logout() } catch (e) { console.error(e) }
   }
 
-  const navLink = "relative px-4 py-2 text-sm font-semibold transition-colors duration-200 group hover:text-white"
+  const navLink = "relative px-4 py-2 text-sm font-semibold transition-colors duration-200 group content-muted hover:content-primary"
 
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-500 ${scrolled ? 'glass border-b' : 'bg-transparent'}`}
@@ -39,7 +39,7 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-0 rounded-xl bg-primary-500/30 blur-md -z-10 group-hover:blur-lg transition-all duration-300" />
             </div>
-            <span className="text-xl font-black tracking-tight text-white group-hover:text-primary-400 transition-colors duration-300">
+            <span className="text-xl font-black tracking-tight content-primary group-hover:text-primary-500 transition-colors duration-300">
               Dev<span className="text-primary-500">Collab</span>
             </span>
           </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
             >
               {isDark
                 ? <Sun className="w-4 h-4 text-yellow-400" />
-                : <Moon className="w-4 h-4 text-white/60" />
+                : <Moon className="w-4 h-4 content-primary" />
               }
             </button>
 
@@ -90,16 +90,16 @@ export default function Navbar() {
                     <img src={user.photoURL} alt={user.displayName || 'User'} className="w-6 h-6 rounded-full ring-1 ring-primary-500/40" />
                   ) : (
                     <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-black text-xs font-black">
-                      {user.email?.[0].toUpperCase()}
+                      {user.email?.[0]?.toUpperCase() || 'U'}
                     </div>
                   )}
-                  <span className="text-xs font-semibold text-white/80 max-w-[90px] truncate">
+                  <span className="text-xs font-semibold content-primary max-w-[90px] truncate">
                     {user.displayName || user.email?.split('@')[0]}
                   </span>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="w-9 h-9 rounded-full glass flex items-center justify-center text-white/40 hover:text-red-400 hover:border-red-500/30 transition-all duration-300"
+                  className="w-9 h-9 rounded-full glass flex items-center justify-center content-faint hover:text-red-500 hover:border-red-500/30 transition-all duration-300"
                   title="Logout"
                 >
                   <LogOut className="w-4 h-4" />
@@ -117,33 +117,33 @@ export default function Navbar() {
             className="md:hidden w-9 h-9 glass rounded-full flex items-center justify-center"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="w-4 h-4 text-white" /> : <Menu className="w-4 h-4 text-white" />}
+            {isMenuOpen ? <X className="w-4 h-4 content-primary" /> : <Menu className="w-4 h-4 content-primary" />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden glass border-t border-white/5 px-4 py-4 space-y-1">
-          <Link to="/" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-primary-400 hover:bg-white/5 transition-all" onClick={() => setIsMenuOpen(false)}>Browse</Link>
+        <div className="md:hidden glass border-t border-[var(--card-border)] px-4 py-4 space-y-1">
+          <Link to="/" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium content-muted hover:content-primary hover:bg-[var(--surface-muted)] transition-all" onClick={() => setIsMenuOpen(false)}>Browse</Link>
           {user && (
             <>
-              <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-primary-400 hover:bg-white/5 transition-all" onClick={() => setIsMenuOpen(false)}><LayoutDashboard className="w-4 h-4" /> Dashboard</Link>
-              <Link to={`/profile/${user.uid}`} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-primary-400 hover:bg-white/5 transition-all" onClick={() => setIsMenuOpen(false)}><User className="w-4 h-4" /> Profile</Link>
-              <Link to="/add-project" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white/70 hover:text-primary-400 hover:bg-white/5 transition-all" onClick={() => setIsMenuOpen(false)}><Plus className="w-4 h-4" /> Add Project</Link>
+              <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium content-muted hover:content-primary hover:bg-[var(--surface-muted)] transition-all" onClick={() => setIsMenuOpen(false)}><LayoutDashboard className="w-4 h-4" /> Dashboard</Link>
+              <Link to={`/profile/${user.uid}`} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium content-muted hover:content-primary hover:bg-[var(--surface-muted)] transition-all" onClick={() => setIsMenuOpen(false)}><User className="w-4 h-4" /> Profile</Link>
+              <Link to="/add-project" className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium content-muted hover:content-primary hover:bg-[var(--surface-muted)] transition-all" onClick={() => setIsMenuOpen(false)}><Plus className="w-4 h-4" /> Add Project</Link>
             </>
           )}
           <div className="sep my-2" />
-          <button onClick={() => { toggleTheme(); setIsMenuOpen(false) }} className="flex items-center gap-2 px-4 py-2.5 rounded-xl w-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all">
-            {isDark ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4" />}
+          <button onClick={() => { toggleTheme(); setIsMenuOpen(false) }} className="flex items-center gap-2 px-4 py-2.5 rounded-xl w-full text-sm font-medium content-muted hover:content-primary hover:bg-[var(--surface-muted)] transition-all">
+            {isDark ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 content-primary" />}
             {isDark ? 'Light Mode' : 'Dark Mode'}
           </button>
           {user ? (
-            <button onClick={() => { handleLogout(); setIsMenuOpen(false) }} className="flex items-center gap-2 px-4 py-2.5 rounded-xl w-full text-sm font-medium text-red-400 hover:bg-red-500/10 transition-all">
+            <button onClick={() => { handleLogout(); setIsMenuOpen(false) }} className="flex items-center gap-2 px-4 py-2.5 rounded-xl w-full text-sm font-medium text-red-500 hover:bg-red-500/10 transition-all">
               <LogOut className="w-4 h-4" /> Logout
             </button>
           ) : (
-            <Link to="/login" className="block px-4 py-2.5 rounded-xl text-sm font-semibold text-primary-400 hover:bg-white/5 transition-all" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+            <Link to="/login" className="block px-4 py-2.5 rounded-xl text-sm font-semibold text-primary-500 hover:bg-[var(--surface-muted)] transition-all" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
           )}
         </div>
       )}

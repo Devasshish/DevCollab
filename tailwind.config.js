@@ -14,7 +14,7 @@ export default {
           200: '#f4ff94',
           300: '#ebff5c',
           400: '#e0ff29',
-          500: '#d4ff00',
+          500: 'rgb(var(--primary-rgb-space) / <alpha-value>)',
           600: '#a6cc00',
           700: '#7d9900',
           800: '#5f7306',
@@ -54,8 +54,8 @@ export default {
           '50%': { 'background-size': '200% 200%', 'background-position': '100% 50%' },
         },
         'pulse-glow': {
-          '0%, 100%': { 'box-shadow': '0 0 20px rgba(212,255,0,0.2), 0 0 60px rgba(212,255,0,0.05)' },
-          '50%': { 'box-shadow': '0 0 40px rgba(212,255,0,0.5), 0 0 80px rgba(212,255,0,0.2)' },
+          '0%, 100%': { 'box-shadow': '0 0 20px rgba(var(--primary-rgb-comma),0.2), 0 0 60px rgba(var(--primary-rgb-comma),0.05)' },
+          '50%': { 'box-shadow': '0 0 40px rgba(var(--primary-rgb-comma),0.5), 0 0 80px rgba(var(--primary-rgb-comma),0.2)' },
         },
         shimmer: {
           from: { 'background-position': '-200% center' },

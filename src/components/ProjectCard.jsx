@@ -52,7 +52,7 @@ function ProjectCard({ project }) {
     >
       {/* Hover glow border */}
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ boxShadow: 'inset 0 0 0 1px rgba(212,255,0,0.2), 0 0 40px rgba(212,255,0,0.04)' }} />
+        style={{ boxShadow: 'inset 0 0 0 1px rgba(var(--primary-rgb-comma),0.2), 0 0 40px rgba(var(--primary-rgb-comma),0.04)' }} />
 
       {/* Image */}
       <div className="relative aspect-video overflow-hidden bg-dark-card">
@@ -70,7 +70,7 @@ function ProjectCard({ project }) {
         {/* Collab badge */}
         {project.lookingForCollab && (
           <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest"
-            style={{ background: 'rgba(212,255,0,0.15)', border: '1px solid rgba(212,255,0,0.35)', color: '#d4ff00' }}>
+            style={{ background: 'rgba(var(--primary-rgb-comma),0.15)', border: '1px solid rgba(var(--primary-rgb-comma),0.35)', color: 'var(--primary)' }}>
             <Users className="w-3 h-3" /> Collab Open
           </div>
         )}
@@ -82,7 +82,7 @@ function ProjectCard({ project }) {
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
               isBookmarked
                 ? 'bg-primary-500 text-black'
-                : 'bg-black/50 backdrop-blur-sm text-white/70 hover:text-primary-400 border border-white/10'
+                : 'bg-black/50 backdrop-blur-sm content-muted hover:content-primary border border-[var(--card-border)]'
             }`}
           >
             <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : ''}`} />
@@ -99,7 +99,7 @@ function ProjectCard({ project }) {
       <div className="p-5 flex flex-col flex-1">
         {/* Title + Upvote */}
         <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-base font-bold text-white group-hover:text-primary-400 transition-colors duration-300 line-clamp-2 leading-snug flex-1">
+          <h3 className="text-base font-bold content-primary group-hover:text-primary-500 transition-colors duration-300 line-clamp-2 leading-snug flex-1">
             {project.title}
           </h3>
           <button
@@ -107,7 +107,7 @@ function ProjectCard({ project }) {
             className={`flex-shrink-0 flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 ${
               hasUpvoted
                 ? 'bg-primary-500/20 text-primary-400 border border-primary-500/40'
-                : 'text-white/40 hover:text-primary-400 hover:bg-primary-500/10 border border-white/5'
+                : 'content-muted hover:text-primary-500 hover:bg-primary-500/10 border border-[var(--card-border)]'
             }`}
           >
             <ChevronUp className="w-4 h-4" />
@@ -115,7 +115,7 @@ function ProjectCard({ project }) {
           </button>
         </div>
 
-        <p className="text-sm text-white/40 line-clamp-2 mb-4 leading-relaxed flex-1">
+        <p className="text-sm content-muted line-clamp-2 mb-4 leading-relaxed flex-1">
           {project.shortDesc}
         </p>
 
@@ -125,27 +125,27 @@ function ProjectCard({ project }) {
             <span key={tech} className="tech-tag">{tech}</span>
           ))}
           {project.techStack.length > 3 && (
-            <span className="px-2.5 py-1 text-[10px] font-bold rounded-full text-white/30 border border-white/5">
+            <span className="px-2.5 py-1 text-[10px] font-bold rounded-full content-faint border border-[var(--card-border)]">
               +{project.techStack.length - 3}
             </span>
           )}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex items-center justify-between pt-4 border-t border-[var(--sep-color)]">
           <Link
             to={`/profile/${project.authorId}`}
             onClick={e => e.stopPropagation()}
             className="flex items-center gap-2 group/a hover:opacity-80 transition-opacity"
           >
             {project.authorPhoto ? (
-              <img src={project.authorPhoto} alt={project.authorName || 'User'} className="w-7 h-7 rounded-full ring-1 ring-white/10" />
+              <img src={project.authorPhoto} alt={project.authorName || 'User'} className="w-7 h-7 rounded-full ring-1 ring-[var(--card-border)]" />
             ) : (
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-black text-xs font-black">
                 {(project.authorName || 'A')[0].toUpperCase()}
               </div>
             )}
-            <span className="text-xs text-white/50 group-hover/a:text-white/80 transition-colors">
+            <span className="text-xs content-muted group-hover/a:content-primary transition-colors">
               {project.authorName || 'Anonymous'}
             </span>
           </Link>
@@ -154,7 +154,7 @@ function ProjectCard({ project }) {
             {project.githubLink && (
               <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-white/30 hover:text-white/70 hover:bg-white/5 transition-all"
+                className="w-7 h-7 rounded-full flex items-center justify-center content-faint hover:content-primary hover:bg-[var(--surface-muted)] transition-all"
                 title="View Code">
                 <Github className="w-3.5 h-3.5" />
               </a>
@@ -162,7 +162,7 @@ function ProjectCard({ project }) {
             {project.demoLink && (
               <a href={project.demoLink} target="_blank" rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-white/30 hover:text-primary-400 hover:bg-primary-500/10 transition-all"
+                className="w-7 h-7 rounded-full flex items-center justify-center content-faint hover:text-primary-500 hover:bg-primary-500/10 transition-all"
                 title="Live Demo">
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>

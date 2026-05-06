@@ -6,7 +6,11 @@ function ReviewCard({ review, onEdit, onDelete }) {
   const { user } = useAuth()
   const isOwner = user?.uid === review.userId
 
-  const formatDate = ts => new Date(ts).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  const formatDate = ts => {
+    if (!ts) return 'Recently';
+    if (typeof ts.toDate === 'function') return ts.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    return new Date(ts).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
 
   return (
     <div className="card rounded-2xl p-5 card-lift">
@@ -29,7 +33,7 @@ function ReviewCard({ review, onEdit, onDelete }) {
         {/* Stars */}
         <div className="flex items-center gap-0.5 flex-shrink-0">
           {[1, 2, 3, 4, 5].map(star => (
-            <Star key={star} className={`w-3.5 h-3.5 ${star <= review.rating ? 'text-yellow-400 fill-current' : 'content-faint opacity-20'}`} />
+            <Star key={star} className={`w-3.5 h-3.5 ${star <= review.rating ? 'text-yellow-400 fill-current' : 'text-black/20 dark:text-white/20'}`} />
           ))}
         </div>
       </div>
